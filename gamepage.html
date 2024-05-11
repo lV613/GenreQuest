@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @import url(https://fonts.googleapis.com/css?family=Lato:400,300,700);
+
+        /* Your CSS styles */
+        *,
+        *:before,
+        *:after {
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #43423E;
+            font-family: "Lato", Arial, sans-serif;
+            color: #A9A8A3;
+            font-size: 14px;
+            line-height: 22px;
+            margin: 0;
+            padding: 0;
+        }
+
+        a {
+            text-decoration: none;
+            color: #5C7FB8;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .game-card {
+            padding: 40px 0;
+        }
+
+        .container {
+            margin: 0 auto;
+            background: #F0F0ED;
+            border-radius: 5px;
+            position: relative;
+        }
+
+        .hero {
+            height: 342px;
+            margin: 0;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+        }
+
+        .hero:before {
+            content: '';
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            overflow: hidden;
+            top: 0;
+            left: 0;
+            background: red;
+          
+            z-index: -1;
+            transform: skewY(-2.2deg);
+            transform-origin: 0 0;
+        }
+
+        .cover {
+            position: absolute;
+            top: 160px;
+            left: 40px;
+            z-index: 2;
+        }
+
+        .details {
+            padding: 190px 0 0 280px;
+        }
+
+        .title1 {
+            color: white;
+            font-size: 44px;
+            margin-bottom: 13px;
+            position: relative;
+        }
+
+        .title1 span {
+            position: absolute;
+            top: 3px;
+            margin-left: 12px;
+            background: #C4AF3D;
+            border-radius: 5px;
+            color: #544C21;
+            font-size: 14px;
+            padding: 0px 4px;
+        }
+
+        .title2 {
+            color: #C7C1BA;
+            font-size: 23px;
+            font-weight: 300;
+            margin-bottom: 15px;
+        }
+
+        .description {
+            bottom: 0px;
+            height: 200px;
+            font-size: 16px;
+            line-height: 26px;
+            color: #B1B0AC;
+        }
+
+        .column1 {
+            padding-left: 50px;
+            padding-top: 120px;
+            width: 220px;
+            float: left;
+            text-align: center;
+        }
+
+        .tag {
+            background: white;
+            border-radius: 10px;
+            padding: 3px 8px;
+            font-size: 14px;
+            margin-right: 4px;
+            line-height: 35px;
+            cursor: pointer;
+        }
+
+        .tag:hover {
+            background: #ddd;
+        }
+
+        .column2 {
+            padding-left: 41px;
+            padding-top: 30px;
+            margin-left: 20px;
+            width: 480px;
+            float: left;
+        }
+
+        /* Star rating styles */
+        .rating {
+            border: none;
+            float: left;
+        }
+
+        .rating > input {
+            display: none;
+        }
+
+        .rating > label:before {
+            margin: 5px;
+            margin-top: 0;
+            font-size: 1em;
+            font-family: FontAwesome;
+            display: inline-block;
+            content: "\f005";
+        }
+
+        .rating > .half:before {
+            content: "\f089";
+            position: absolute;
+        }
+
+        .rating > label {
+            color: #ddd;
+            float: right;
+        }
+
+        .rating > input:checked ~ label,
+        .rating:not(:checked) > label:hover,
+        .rating:not(:checked) > label:hover ~ label {
+            color: #FFD700;
+        }
+
+        .rating > input:checked + label:hover,
+        .rating > input:checked ~ label:hover,
+        .rating > label:hover ~ input:checked ~ label,
+        .rating > input:checked ~ label:hover ~ label {
+            color: #FFED85;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-card">
+        <div class="container">
+            <div class="hero">
+                <a href="#"><img src="" alt="cover" class="cover" /></a>
+                <div class="details">
+                    <div class="title1">The Hobbit <span>PG-13</span></div>
+                    <div class="title2">The Battle of the Five Armies</div>
+                    <fieldset class="rating">
+                        <!-- Star rating inputs will be added dynamically -->
+                    </fieldset>
+                </div>
+            </div>
+            <div class="description">
+                <div class="column1">
+                    <!-- Tags will be added dynamically -->
+                </div>
+                <div class="column2">
+                    <!-- Description will be added dynamically -->
+                </div>
+            </div>
+        </div> <!-- end container -->
+    </div> <!-- end game-card -->
+
+    <script>
+      // Extract game ID from URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const gameId = urlParams.get('gameId');
+      
+      const apiKey = '4c19a194643944708174f65954be4868'; // Replace 'YOUR_API_KEY' with your actual API key
+      
+      // Fetch game data using the game ID and API key
+      fetch(`https://api.rawg.io/api/games/${gameId}?key=${apiKey}`)
+          .then(response => response.json())
+          .then(data => {
+              // Update background image
+              const hero = document.querySelector('.hero');
+              hero.style.backgroundImage = `url('${data.background_image}')`;
+      
+              // Update cover image
+              const coverImage = document.querySelector('.cover');
+              coverImage.src = data.background_image;
+      
+              // Update title
+              const title1 = document.querySelector('.title1');
+              title1.textContent = data.name;
+      
+              // Update rating
+              const ratingFieldset = document.querySelector('.rating');
+              const rating = data.rating;
+              const maxRating = 5;
+              const starRating = Math.round(rating * 2) / 2; // Round to nearest 0.5
+              for (let i = 1; i <= maxRating; i++) {
+                  const star = document.createElement('input');
+                  star.type = 'radio';
+                  star.id = `star${i}`;
+                  star.name = 'rating';
+                  star.value = i;
+                  star.style.display = 'none';
+                  ratingFieldset.appendChild(star);
+      
+                  const label = document.createElement('label');
+                  label.htmlFor = `star${i}`;
+                  label.title = `${i} star${i !== 1 ? 's' : ''}`;
+                  label.innerHTML = i <= starRating ? '&#9733;' : '&#9734;';
+                  ratingFieldset.appendChild(label);
+              }
+      
+              // Update tags
+              const tags = data.tags.map(tag => `<span class="tag">${tag.name}</span>`).join('');
+              const column1 = document.querySelector('.column1');
+              column1.innerHTML = tags;
+      
+              // Update description
+              const description = `<p>${data.description}</p>`;
+              const column2 = document.querySelector('.column2');
+              column2.innerHTML = description;
+          })
+          .catch(error => console.error('Error fetching game data:', error));
+  </script>
+  
+        
+</body>
+</html>

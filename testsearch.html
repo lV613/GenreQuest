@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Search</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .nav {
+            position: fixed;
+            background-color: #000000;
+            top: 0;
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            height: 90px;
+            line-height: 90px;
+            z-index: 100;
+          }
+          
+          .nav-logo p {
+            color: white;
+            font-size: 25px;
+            font-weight: 600;
+          }
+          
+          .nav-menu ul {
+            display: flex;
+          }
+          
+          .nav-menu ul li {
+            list-style-type: none;
+          }
+          
+          .nav-menu ul li .link {
+            text-decoration: none;
+            font-weight: 500;
+            color: #fff;
+            padding-bottom: 15px;
+            margin: 0 25px;
+          }
+          
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        #suggestions {
+            margin-bottom: 10px;
+        }
+
+        #searchResults {
+            display: none;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            grid-gap: 10px;
+        }
+
+        .game-card {
+            border: 1px solid #160b0b;
+            border-radius: 5px;
+            padding: 10px;
+        }
+
+        .game-card img {
+            width: 100%;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-logo">
+          <p>GenreQuest</p>
+        </div>
+        <div class="nav-menu" id="navMenu">
+          <ul>
+            <li><a href="GQhome.html" class="link">Home</a></li>
+            <li><a href="index.html" class="link">Top 100</a></li>
+            <li><a href="testsearch.html" class="link active">Browse</a></li>
+            <li><a href="Forum.html" class="link">Forum</a></li>
+            <li><a href="GQlogin.html" class="link">Login</a></li>
+          </ul>
+        </div>
+      </nav>
+
+    <div class="container">
+        <h1>Game Search</h1>
+        <input type="text" id="searchInput" placeholder="Enter game title">
+        <div id="suggestions"></div>
+        <div id="searchResults"></div>
+    </div>
+
+    <script>
+        const searchInput = document.getElementById('searchInput');
+        const suggestions = document.getElementById('suggestions');
+        const searchResults = document.getElementById('searchResults');
+        const API_KEY = '4c19a194643944708174f65954be4868';
+        const API_URL = 'https://api.rawg.io/api/games';
+        let games = [];
+
+        // Function to fetch games and store them in client-side storage
+        const fetchGames = async () => {
+            const response = await fetch(`${API_URL}?key=${API_KEY}&page_size=100`);
+            if (!response.ok) throw new Error('Error fetching games');
+            const data = await response.json();
+            games = data.results;
+            localStorage.setItem('games', JSON.stringify(games));
+        };
+
+        // Function to fetch game suggestions based on user input
+        const fetchSuggestions = async (query) => {
+            if (!query.trim()) return [];
+            const filteredGames = games.filter(game => game.name.toLowerCase().includes(query.toLowerCase()));
+            return filteredGames.map(game => game.name).slice(0, 5);
+        };
+
+        // Function to display game suggestions
+        const showSuggestions = async () => {
+            suggestions.innerHTML = '';
+            const query = searchInput.value.trim();
+            if (!query) return;
+            try {
+                const suggestionsData = await fetchSuggestions(query);
+                suggestionsData.forEach(async name => {
+                    const gameDetails = await fetchGameDetails(name);
+                    requestAnimationFrame(() => displayGameDetails(gameDetails));
+                });
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        // Event listener for search input
+        searchInput.addEventListener('input', showSuggestions);
+
+        // Function to fetch game details by name
+        const fetchGameDetails = async (name) => {
+            const game = games.find(g => g.name.toLowerCase() === name.toLowerCase());
+            return game;
+        };
+
+        // Function to display game details
+        const displayGameDetails = (game) => {
+            if (!game) return;
+            const gameCard = `
+                <div class="game-card">
+                    <a href="gamepage.html?gameId=${game.id}">
+                        <h2>${game.name}</h2>
+                        <img src="${game.background_image}" alt="${game.name}">
+                        <p>Rating: ${game.rating}</p>
+                    </a>
+                </div>
+            `;
+            searchResults.innerHTML += gameCard;
+            searchResults.style.display = 'grid';
+        };
+
+        // Fetch games when the page loads
+        fetchGames();
+    </script>
+</body>
+</html>

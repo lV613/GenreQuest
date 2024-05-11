@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Profile</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f0f0f0;
+    }
+    .nav {
+      position: fixed;
+      background-color: #000000;
+      top: 0;
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      height: 90px;
+      line-height: 90px;
+      z-index: 100;
+      padding: 0 20px;
+    }
+    
+    .nav-logo p {
+      color: white;
+      font-size: 25px;
+      font-weight: 600;
+      margin: 0;
+    }
+    
+    .nav-menu ul {
+      display: flex;
+      align-items: center;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .nav-menu ul li {
+      list-style-type: none;
+      margin: 0 15px;
+    }
+    
+    .nav-menu ul li .link {
+      text-decoration: none;
+      font-weight: 500;
+      color: #fff;
+      padding-bottom: 15px;
+    }
+    .profile-container {
+      max-width: 800px;
+      margin: 120px auto 20px;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+    
+    .profile-container h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    
+    .edit-profile-section {
+      display: none;
+    }
+    
+    .user-info {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    
+    .profile-picture {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+    
+    .profile-picture input[type="file"],
+    .profile-bg input[type="file"] {
+      margin-top: 10px;
+    }
+    
+    .user-details {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .user-details input[type="text"] {
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+    
+    button {
+      padding: 8px 16px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    
+    button:hover {
+      background-color: #0056b3;
+    }
+    
+    .game-section {
+      display: flex;
+      gap: 20px;
+    }
+    
+    .game-list {
+      flex: 1;
+      background-color: #f9f9f9;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .game-list h3 {
+      margin-bottom: 10px;
+    }
+    
+    .games {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .games li {
+      margin-bottom: 5px;
+    }
+    
+    /* Hide the add to list input field by default */
+    .game-list input[type="text"] {
+      display: none;
+    }
+    
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="nav-logo">
+      <p>GenreQuest</p>
+    </div>
+    <div class="nav-menu" id="navMenu">
+      <ul>
+        <li><a href="GQhome.html" class="link">Home</a></li>
+        <li><a href="index.html" class="link">Top 100</a></li>
+        <li><a href="testsearch.html" class="link active">Browse</a></li>
+        <li><a href="Forum.html" class="link">Forum</a></li>
+        <li><a id="loginLink" href="GQlogin.html" class="link">Login</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="profile-container">
+    <h1>User Profile</h1>
+    <button id="editProfileBtn" onclick="toggleEditProfile()">Edit Profile</button>
+    <div class="edit-profile-section">
+      <div class="user-info">
+        <div class="profile-picture">
+          <img id="profileImg" class="profile-img" src="" alt="Profile Picture">
+          <input type="file" id="profilePictureInput">
+        </div>
+        <div class="user-details">
+          <input type="text" id="firstNameInput" placeholder="First Name">
+          <input type="text" id="lastNameInput" placeholder="Last Name">
+          <input type="text" id="emailInput" placeholder="Email">
+          <input type="text" id="usernameInput" placeholder="Edit Username">
+          <button onclick="editUserInfo()">Save Changes</button>
+        </div>
+        <div class="profile-bg">
+          <img id="backgroundImg" class="profile-bg-img" src="" alt="Background Image">
+          <input type="file" id="backgroundInput">
+        </div>
+      </div>
+    </div>
+    <div class="game-section">
+      <section class="game-list">
+        <h3>Favorite Games</h3>
+        <ul id="favoriteGames" class="games"></ul>
+        <input type="text" id="favoriteGameInput" placeholder="Add Favorite Game">
+        <button onclick="toggleAddInput('favoriteGameInput')">Add</button>
+      </section>
+      <section class="game-list">
+        <h3>Played Games</h3>
+        <ul id="playedGames" class="games"></ul>
+        <input type="text" id="playedGameInput" placeholder="Add Played Game">
+        <button onclick="toggleAddInput('playedGameInput')">Add</button>
+      </section>
+      <section class="game-list">
+        <h3>Planned Games</h3>
+        <ul id="plannedGames" class="games"></ul>
+        <input type="text" id="plannedGameInput" placeholder="Add Planned Game">
+        <button onclick="toggleAddInput('plannedGameInput')">Add</button>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      checkLogin();
+      displayUserInfo();
+    });
+
+    function checkLogin() {
+      const isLoggedIn = localStorage.getItem('isLoggedIn');
+      const loginLink = document.getElementById('loginLink');
+
+      if (isLoggedIn === 'true') {
+        loginLink.innerHTML = '<a href="profile.html" class="link">Profile</a>';
+      }
+    }
+
+    function displayUserInfo() {
+      var currentUser = JSON.parse(localStorage.getItem('currentUser'));
+      if (currentUser) {
+        document.getElementById('profileImg').src = currentUser.profilePicture || 'default-profile.png';
+        document.getElementById('backgroundImg').src = currentUser.backgroundImage || 'default-background.jpg';
+        document.getElementById('firstNameInput').value = currentUser.firstName || '';
+        document.getElementById('lastNameInput').value = currentUser.lastName || '';
+        document.getElementById('emailInput').value = currentUser.email || '';
+        document.getElementById('usernameInput').value = currentUser.username || '';
+
+        // Populate game lists
+        populateGameList('favoriteGames', currentUser.favoriteGames);
+        populateGameList('playedGames', currentUser.playedGames);
+        populateGameList('plannedGames', currentUser.plannedGames);
+      }
+    }
+
+    function editUserInfo() {
+      var currentUser = JSON.parse(localStorage.getItem('currentUser'));
+      if (currentUser) {
+        currentUser.firstName = document.getElementById('firstNameInput').value;
+        currentUser.lastName = document.getElementById('lastNameInput').value;
+        currentUser.email = document.getElementById('emailInput').value;
+        currentUser.username = document.getElementById('usernameInput').value;
+        localStorage.setItem('currentUser', JSON.stringify(currentUser));
+      }
+    }
+
+    function addGameToList(listId) {
+      var gameInput = document.getElementById(listId).value;
+      updateGameList(listId, gameInput);
+      toggleAddInput(listId); // Hide the input field after adding the game
+    }
+
+    function updateGameList(listId, gameInput) {
+      var currentUser = JSON.parse(localStorage.getItem('currentUser'));
+
+      if (currentUser) {
+        if (!currentUser[listId]) {
+          currentUser[listId] = [];
+        }
+        currentUser[listId].push(gameInput);
+        localStorage.setItem('currentUser', JSON.stringify(currentUser));
+        populateGameList(listId, currentUser[listId]);
+      }
+    }
+
+    function populateGameList(listId, games) {
+      var listElement = document.getElementById(listId);
+      listElement.innerHTML = '';
+      if (games) {
+        games.forEach(function(game) {
+          var li = document.createElement('li');
+          li.textContent = game;
+          listElement.appendChild(li);
+        });
+      }
+    }
+
+    document.getElementById('profilePictureInput').addEventListener('change', function(event) {
+      var file = event.target.files[0];
+      var reader = new FileReader();
+      reader.onload = function() {
+        var currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        if (currentUser) {
+          currentUser.profilePicture = reader.result;
+          localStorage.setItem('currentUser', JSON.stringify(currentUser));
+          document.getElementById('profileImg').src = reader.result;
+        }
+      }
+      reader.readAsDataURL(file);
+    });
+
+    document.getElementById('backgroundInput').addEventListener('change', function(event) {
+      var file = event.target.files[0];
+      var reader = new FileReader();
+      reader.onload = function() {
+        var currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        if (currentUser) {
+          currentUser.backgroundImage = reader.result;
+          localStorage.setItem('currentUser', JSON.stringify(currentUser));
+          document.getElementById('backgroundImg').src = reader.result;
+        }
+      }
+      reader.readAsDataURL(file);
+    });
+
+    function toggleEditProfile() {
+      var editProfileSection = document.querySelector('.edit-profile-section');
+      editProfileSection.style.display = editProfileSection.style.display === 'none' ? 'block' : 'none';
+    }
+
+    function toggleAddInput(inputId) {
+      var inputField = document.getElementById(inputId);
+      inputField.style.display = inputField.style.display === 'none' ? 'block' : 'none';
+      inputField.focus(); // Focus on the input field when it's shown
+    }
+  </script>
+</body>
+</html>
