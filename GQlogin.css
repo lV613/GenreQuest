@@ -1,4 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap");
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
+      
 *{
 margin: 0;
 padding: 0;
@@ -30,24 +33,38 @@ body{
     background: linear-gradient(rgba(39,39,39, 0.6), transparent);
     z-index: 100;
     }
-    .nav-logo p{
-    color: white;
-    font-size: 25px;
-    font-weight: 600;
-    }
-    .nav-menu ul{
-    display: flex;
-    }
-    .nav-menu ul li{
-    list-style-type: none;
-    }
-    .nav-menu ul li .link{
-    text-decoration: none;
-    font-weight: 500;
-    color: #fff;
-    padding-bottom: 15px;
-    margin: 0 25px;
-    }
+    .nav-logo {
+        font-size: 1.8rem;
+        }
+        .nav h1{
+         
+          color: white;
+          font-weight: 100;
+          font-family: "Black Ops One";
+          padding-bottom: 5rem;
+        }
+        
+        .nav-menu ul{
+        display: inline-flex;
+        }
+        .nav-menu ul li{
+          display: block;
+        list-style-type: none;
+        }
+        .nav-menu ul li .link{
+        text-decoration: none;
+        font-weight: 500;
+        color: #fff;
+        padding-bottom: 15px;
+        margin: 0 25px;
+        }
+        .link:hover, .active{
+        border-bottom: 2px solid #fff;
+        }
+        .nav h1 span {
+          color: #0ea5e9;
+          font-family: "Black Ops One";
+        }
     .link:hover, .active{
     border-bottom: 2px solid #fff;
     }

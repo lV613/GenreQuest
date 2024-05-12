@@ -1,0 +1,14 @@
+body{
+    background-color: black;
+}
+.game-card{
+    background-color: rgb(20, 21, 24);
+    padding: 40px 20px;
+}
+.cover {
+    left: 40px;
+    z-index: 2;
+}
+.hero {
+    width: 1fr;
+}

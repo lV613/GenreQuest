@@ -4,10 +4,44 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Home Page</title>
-<link rel="stylesheet" href="GQhome.css">
 <style>
-    /* Basic styling */
+    @import url("https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap");
+    @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
+  
+    .slideshow-container {
+        max-width: 1000px;
+        position: relative;
+        margin: auto;
+        overflow: hidden;
+        margin-bottom: 20px; /* Add some margin below the slideshow */
+    }
 
+    .mySlides {
+        display: none;
+        width: 1000px;
+
+    }
+
+    img {
+        width: 100%;
+        height: auto;
+    }
+
+    .fade {
+        animation-name: fade;
+        animation-duration: 2s;
+    }
+
+    @keyframes fade {
+        from {
+            opacity: 0.4;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    /* Existing styling from your CSS */
     .activity-card {
         background-color:#222222;
         border-radius: 5px;
@@ -24,56 +58,394 @@
         color: #666;
         font-size: 0.9em;
     }
+    .slideshow-container {
+        max-width: 1000px;
+        position: relative;
+        margin: auto;
+        overflow: hidden;
+        margin-bottom: 20px; /* Add some margin below the slideshow */
+    }
+
+    .mySlides {
+        display: none;
+        width: 100%;
+    }
+
+    .translucent-slide {
+        position: absolute;
+        opacity: 0.4; /* Adjust the opacity as needed */
+        transition: opacity 1s ease, transform 1s ease; /* Add transition effect */
+        transform: translateX(100%);
+    }
+
+    img {
+        width: 100%;
+        height: auto;
+    }
+
+    .fade {
+        animation-name: fade;
+        animation-duration: 2s;
+    }
+
+    @keyframes fade {
+        from {
+            opacity: 0.4;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    /* Existing styling from your CSS */
+    .activity-card {
+        background-color:#222222;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+    .title {
+        font-weight: bold;
+        font-size: 1.2em;
+        margin-bottom: 5px;
+    }
+    .metadata {
+        color: #666;
+        font-size: 0.9em;
+    }
+    /* GQhome.css */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa; /* Light gray background */
+}
+
+.nav{
+    position: fixed;
+    top: 0;
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    height: 100px;
+    line-height: 100px;
+    background: #0e0f11;
+    z-index: 100;
+    }
+    .nav h1{
+      color: white;
+      font-weight: 100;
+      font-size: 2.4rem;
+      font-family: "Black Ops One";
+    }
+    .nav-logo p{
+    color: white;
+    font-size: 2rem;
+    font-weight: 600;
+    }
+    .nav-menu ul{
+    display: inline-flex;
+    }
+    .nav-menu ul li{
+      display: block;
+    list-style-type: none;
+    }
+    .nav-menu ul li .link{
+    text-decoration: none;
+    font-weight: 500;
+    color: #fff;
+    padding-bottom: 15px;
+    margin: 0 25px;
+    }
+    .link:hover, .active{
+    border-bottom: 2px solid #fff;
+    }
+    .nav h1 span {
+      color: #0ea5e9;
+      font-family: "Black Ops One";
+    }
+/* Container */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 3fr 1fr; /* 3/4 and 1/4 width */
+    grid-gap: 20px;
+}
+.game-card-display {
+    width: 75%;
+    float: left;
+    padding: 20px;
+}
+
+/* Genre selection */
+.genre-selection {
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 buttons in a row */
+    grid-gap: 10px;
+}
+
+/* Genre selection button */
+.genre-selection button {
+    background-color: #ccc;
+    color: #333;
+    
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.genre-selection button:hover {
+    background-color: #007bff;
+    color: #fff;
+}
+
+/* Rounded corners for genre selection buttons */
+.genre-selection button {
+    border-radius: 5px;
+}
+
+#FAMOUS{
+    width: 300px;
+    height: 300px;
+}
+
+/* Reset default margin and padding */
+body, h1, h2, h3, p, ul, li {
+    margin: 0;
+    padding: 0;
+}
+
+/* Set default font and background color */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #0f0f0f;
+    color: #ffffff;
+}
+
+/* Header styling */
+header {
+    background-color: #000000;
+    padding: 20px;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+nav ul {
+    list-style-type: none;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav ul li a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 1.2em;
+}
+
+nav ul li a:hover {
+    color: #ffae00;
+}
+
+/* Hero section styling */
+#hero {
+    background-image: url('https://get.wallhere.com/photo/The-Last-of-Us-2-Naughty-Dog-screen-shot-dark-video-games-1923229.jpg'); /* Replace with your background image */
+    background-size: cover;
+    background-position: center;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.hero-content {
+    max-width: 600px;
+}
+
+.hero-content h2 {
+    font-size: 3em;
+    margin-bottom: 20px;
+}
+
+.hero-content p {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+}
+
+.btn {
+    padding: 10px 20px;
+    font-size: 1.2em;
+    background-color: #ffae00;
+    color: #000000;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+}
+
+.btn:hover {
+    background-color: #ffd633;
+}
+
+/* Genres section styling */
+#genres {
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.genre-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.genre {
+    background-color: #222222;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+}
+
+.genre h3 {
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+.genre p {
+    font-size: 1.1em;
+}
+
+/* About section styling */
+#about {
+    background-color: #000000;
+    color: #ffffff;
+    padding: 50px 20px;
+    text-align: center;
+}
+
+/* Contact section styling */
+#contact {
+    background-color: #222222;
+    padding: 50px 20px;
+    text-align: center;
+}
+
+footer {
+    background-color: #000000;
+    color: #ffffff;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Game card styling */
+.game-card {
+    background-color: #333333;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+}
+
+.game-card img {
+    width: 100%;
+    border-radius: 5px;
+}
+
+.game-card h4 {
+    font-size: 1.5em;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.game-card p {
+    font-size: 1em;
+}
+
+
+.activity-img{
+    width: 150px;
+}
+.game-card-img{
+    width: 250px;
+
+}
 </style>
 </head>
 <body>
     <nav class="nav">
         <div class="nav-logo">
-            <p>GenreQuest</p>
+          <h1>Genre<span>Quest</span></h1>
         </div>
         <div class="nav-menu" id="navMenu">
-            <ul>
-                <li><a href="GQhome.html" class="link">Home</a></li>
-                <li><a href="index.html" class="link">Top 100</a></li>
-                <li><a href="testsearch.html" class="link">Browse</a></li>
-                <li><a href="Forum.html" class="link">Forum</a></li>
-                <li id="loginLink"><a href="GQlogin.html" class="link active">Login</a></li>
-            </ul>
+        <ul>
+        <li><a href="GQhome.html" class="link active">Home</a></li>
+        <li><a href="index.html" class="link">Top100</a></li>
+        <li><a href="test.html" class="link">Browse</a></li>
+        <li><a href="Forum.html" class="link">Forum</a></li>
+        <li><a href="GQlogin.html" class="link">Login</a></li>
+        </ul>
         </div>
-    </nav>
-    <br>
-    <br>
-    <br>
-    <br>
+        </nav>
+    <br><br><br><br><br><br><br><br><br>
+    <!-- Slideshow -->
+    <!-- <div class="activity-card">
+        <div class="slideshow-container">
+            <div class="translucent-slide fade">
+                <img src="translucent_image.jpg" alt="Translucent Image">
+            </div>
+            <div class="mySlides fade">
+                <img src="image1.jpg" alt="Slideshow Image 1">
+            </div>
+            <div class="mySlides fade">
+                <img src="image2.jpg" alt="Slideshow Image 2">
+            </div>
+            <div class="mySlides fade">
+                <img src="image3.jpg" alt="Slideshow Image 3">
+            </div>
+        </div>
+    </div> -->
+
+    <!-- Your existing content -->
     <div class="container">
         <header>
             <h1>Welcome to GenreQuest</h1>
             <nav>
                 <ul>
                     <li><a href="#genres">Genres</a></li>
-                    <li><a href="#your-activity">Your Activity</a></li>
+                    <li><a href="">Your Activity</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
-        </header>
-
-        <!-- Your Activity Section -->
-        <section id="your-activity">
+            <br>
             <div class="activity-card">
-                <p class="title">Finished Game : The Last of Us: Part-1</p>
-                <img src="https://upload.wikimedia.org/wikipedia/en/4/46/Video_Game_Cover_-_The_Last_of_Us.jpg" alt="The Last of Us">
-                <p>
+                <p class="title">Finished Game : The last of Us:Part-1</p>
+                <img class="activity-img" src="https://upload.wikimedia.org/wikipedia/en/4/46/Video_Game_Cover_-_The_Last_of_Us.jpg" alt=""><p>
                     The Last of Us is a 2013 action-adventure game developed by Naughty Dog and published by Sony Computer Entertainment. Players control Joel, a smuggler tasked with escorting a teenage girl, Ellie, across a post-apocalyptic United States. The Last of Us is played from a third-person perspective. Players use firearms and improvised weapons and can use stealth to defend against hostile humans and cannibalistic creatures infected by a mutated fungus. In the online multiplayer mode, up to eight players engage in cooperative and competitive gameplay.
                 </p>
             </div>
             <div class="activity-card">
                 <p class="title">Planning : Hogwarts Legacy</p>
-                <img src="https://m.media-amazon.com/images/I/81A9m2D-mVL.__AC_SX300_SY300_QL70_FMwebp_.jpg" alt="Hogwarts Legacy">
-                <p>
+                <img class="activity-img" src="https://m.media-amazon.com/images/I/81A9m2D-mVL.__AC_SX300_SY300_QL70_FMwebp_.jpg" alt=""><p>
                     Hogwarts Legacy is a 2023 action role-playing game developed by Avalanche Software and published by Warner Bros. Games under its Portkey Games label. The game is part of the Wizarding World franchise, taking place a century prior to the events chronicled in the Harry Potter novels. The player controls a student enrolled in the Hogwarts School of Witchcraft and Wizardry who learns to wield an array of magical abilities and objects. With the assistance of fellow students and professors, the protagonist embarks on a journey to unearth an ancient secret concealed within the wizarding world.
                 </p>
             </div>
-        </section>
+        </header>
 
         <section id="hero">
             <div class="hero-content">
@@ -89,7 +461,7 @@
                 <div class="genre">
                     <h3>Action</h3>
                     <div class="game-card">
-                        <img src="https://www.posters.eu/media/catalog/product/cache/cb3faf85ecb1e071fdba48f981c86454/p/y/py_pp34971-playstation-god-of-war-poster-61x91-5cm.jpg" alt="God of War">
+                        <img class="game-card-img" src="https://www.posters.eu/media/catalog/product/cache/cb3faf85ecb1e071fdba48f981c86454/p/y/py_pp34971-playstation-god-of-war-poster-61x91-5cm.jpg" alt="Action Game">
                         <h4>God Of War</h4>
                         <p>God of War is a fantasy action-adventure game franchise created by David Jaffe and developed by Santa Monica Studio. Based on ancient mythologies, the series' plot follows Kratos, a Spartan warrior who becomes the God of War and comes into conflict with various mythological pantheons.</p>
                     </div>
@@ -97,27 +469,31 @@
                 <div class="genre">
                     <h3>Adventure</h3>
                     <div class="game-card">
-                        <img src="https://m.media-amazon.com/images/I/61GcAsAs9vL.__AC_SX300_SY300_QL70_ML2_.jpg" alt="Red Dead Redemption 2">
+                        <img class="game-card-img" src="https://m.media-amazon.com/images/I/61GcAsAs9vL.__AC_SX300_SY300_QL70_ML2_.jpg" alt="Adventure Game">
                         <h4>Red Dead Redemption 2</h4>
                         <p>Red Dead Redemption 2 is a 2018 action-adventure game developed and published by Rockstar Games. The story is set in a fictionalized representation of the United States in 1899 and follows the exploits of Arthur Morgan, an outlaw and member of the Van der Linde gang, who must deal with the decline of the Wild West while attempting to survive against government forces, rival gangs, and other adversaries. </p>
                     </div>
+                    
                 </div>
                 <div class="genre">
                     <h3>RPG</h3>
                     <div class="game-card">
-                        <img src="https://upload.wikimedia.org/wikipedia/en/9/9f/Cyberpunk_2077_box_art.jpg" alt="Cyberpunk 2077">
+                        <img class="game-card-img" src="https://upload.wikimedia.org/wikipedia/en/9/9f/Cyberpunk_2077_box_art.jpg" alt="Adventure Game">
                         <h4>Cyberpunk 2077</h4>
                         <p>Cyberpunk 2077 is a 2020 action role-playing video game. The plot is set in the fictional metropolis of Night City, California, within the dystopian Cyberpunk universe. The player assumes the role of V , a mercenary who accidentally gets imbued with a cybernetic "bio-chip" containing an engram of legendary rockstar and terrorist Johnny Silverhand. As Johnny's consciousness begins overwriting V's own, the two must work together to separate and save V's life.</p>
                     </div>
+                    
                 </div>
                 <div class="genre">
                     <h3>Strategy</h3>
                     <div class="game-card">
-                        <img src="https://m.media-amazon.com/images/I/8104uLRTH0L._AC_SL1500_.jpg" alt="Civilization VI">
-                        <h4>Civilization VI</h4>
+                        <img class="game-card-img" src="https://m.media-amazon.com/images/I/8104uLRTH0L._AC_SL1500_.jpg" alt="Adventure Game">
+                        <h4>Civilization VI </h4>
                         <p>Sid Meier's Civilization VI is a turn-based strategy 4X video game. The latest entry into the Civilization series, it was released on Windows and macOS in October 2016, with later ports for Linux in February 2017, iOS in December 2017, Nintendo Switch in November 2018, PlayStation 4 and Xbox One in November 2019, and Android in 2020.</p>
                     </div>
+                    
                 </div>
+
             </div>
         </section>
 
@@ -130,25 +506,90 @@
             <h2>Contact Us</h2>
             <p>Have questions or feedback? We'd love to hear from you! Reach out to us at support@genrequest.com</p>
         </section>
+
+        <footer>
+            <p>&copy; 2024 GenreQuest. All rights reserved.</p>
+        </footer>
     </div>
 
-    <footer>
-        <p>&copy; 2024 GenreQuest. All rights reserved.</p>
-    </footer>
-
     <script>
-        // Function to check if user is logged in
-        function checkLogin() {
-            const isLoggedIn = localStorage.getItem('isLoggedIn');
+        var slideIndex = 0;
+        showSlides();
 
-            if (isLoggedIn === 'true') {
-                // User is logged in, replace login link with profile link
-                document.getElementById('loginLink').innerHTML = '<a href="GQprofile.html" class="link active">Profile</a>';
+        function showSlides() {
+            var i;
+            var slides = document.getElementsByClassName("mySlides");
+            var translucentSlide = document.querySelector(".translucent-slide");
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
             }
+            slideIndex++;
+            if (slideIndex > slides.length) {
+                slideIndex = 1;
+            }
+            translucentSlide.style.transform = "translateX(0)";
+            setTimeout(function() {
+                translucentSlide.style.opacity = 1;
+            }, 100);
+            setTimeout(function() {
+                translucentSlide.style.opacity = 0.4;
+                translucentSlide.style.transform = "translateX(-100%)";
+            }, 1000);
+            setTimeout(function() {
+                slides[slideIndex - 1].style.display = "block";
+            }, 1000);
+            setTimeout(showSlides, 3000); // Change image every 3 seconds
         }
-
-        // Call the function when the page loads
-        window.onload = checkLogin;
     </script>
+<script>
+    // GQhome.js
+
+// Sample game data for demonstration
+const gamesData = [
+{ title: "Game 1", genre: "Action" },
+{ title: "Game 2", genre: "Action" },
+{ title: "Game 3", genre: "Action" },
+{ title: "Game 4", genre: "Adventure" },
+{ title: "Game 5", genre: "Adventure" },
+{ title: "Game 6", genre: "RPG" },
+{ title: "Game 7", genre: "RPG" },
+{ title: "Game 8", genre: "Racing" },
+{ title: "Game 9", genre: "Racing" },
+{ title: "Game 10", genre: "Sports" },
+{ title: "Game 11", genre: "Sports" },
+{ title: "Game 12", genre: "Puzzle" },
+{ title: "Game 13", genre: "Puzzle" },
+];
+
+// Function to filter games based on selected genre
+function filterGamesByGenre(genre) {
+return gamesData.filter(game => game.genre === genre);
+}
+
+// Function to display games in the game card display
+function displayGames(games) {
+const gameCardDisplay = document.querySelector('.game-card-display');
+gameCardDisplay.innerHTML = ''; // Clear previous content
+
+games.forEach(game => {
+    const gameCard = document.createElement('div');
+    gameCard.classList.add('game-card');
+    gameCard.innerHTML = `<h3>${game.title}</h3>`;
+    gameCardDisplay.appendChild(gameCard);
+});
+}
+
+// Genre selection buttons
+const genreButtons = document.querySelectorAll('.genre-selection button');
+
+// Add event listeners to genre buttons
+genreButtons.forEach(button => {
+button.addEventListener('click', () => {
+    const selectedGenre = button.textContent;
+    const filteredGames = filterGamesByGenre(selectedGenre);
+    displayGames(filteredGames.slice(0, 10)); // Display first 10 games
+});
+});
+</script>
 </body>
 </html>

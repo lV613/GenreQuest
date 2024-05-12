@@ -4,20 +4,11 @@ font & reset css
 --------------------------------------------- 
 */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900");
-/* 
----------------------------------------------
-reset
---------------------------------------------- 
-*/
-html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, div
-pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q,
-s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li,
-figure, header, nav, section, article, aside, footer, figcaption {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  outline: 0;
-}
+@import url("https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap");
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
+       
+
+
 
 .clearfix:after {
   content: ".";
@@ -39,78 +30,67 @@ html[xmlns] .clearfix {
 * html .clearfix {
   height: 1%;
 }
-.nav {
+.nav{
   position: fixed;
-  background-color: #000000;
   top: 0;
   display: flex;
   justify-content: space-around;
   width: 100%;
-  height: 90px;
-  line-height: 90px;
+  height: 100px;
+  line-height: 100px;
+  background: #1f2122;
   z-index: 100;
-}
-
-.nav-logo p {
-  color: white;
-  font-size: 25px;
-  font-weight: 600;
-}
-
-.nav-menu ul {
-  display: flex;
-}
-
-.nav-menu ul li {
+  }
+  .nav-logo{
+    font-size: 1.8rem;
+  }
+  .nav h1{
+    margin-top: 2rem;
+    color: white;
+    font-weight: 100;
+    font-family: "Black Ops One";
+  }
+  
+  .nav-menu ul{
+  display: inline-flex;
+  }
+  .nav-menu ul li{
+    display: block;
   list-style-type: none;
-}
-
-.nav-menu ul li .link {
+  }
+  .nav-menu ul li .link{
   text-decoration: none;
   font-weight: 500;
   color: #fff;
   padding-bottom: 15px;
   margin: 0 25px;
+  }
+  .link:hover, .active{
+  border-bottom: 2px solid #fff;
+  }
+  .nav h1 span {
+    color: #0ea5e9;
+    font-family: "Black Ops One";
+  }
+  .nav-button .btn{
+  width: 130px;
+  height: 40px;
+font-weight: 500;
+background: rgba(255, 255, 255, 0.4);
+border: none;
+border-radius: 30px;
+cursor: pointer;
+transition: .3s ease;
 }
-
-.search-container {
-  margin-top: 120px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-.genre-buttons {
-  margin-bottom: 10px;
-}
-
-.genre-filter {
-  background-color: #333;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  padding: 8px 15px;
-  margin-right: 10px;
-  cursor: pointer;
-}
-
-.genre-filter.active {
-  background-color: #e75e8d;
-}
-
-.rating-filter {
-  padding: 8px;
-  margin-left: 10px;
-  border-radius: 5px;
-  cursor: pointer;
+.btn:hover{
+background: rgba(255, 255, 255, 0.3);
 }
 
 .page-content {
   margin-top: 110px; 
   background-color: #27292a;
   padding: 60px;
-  border-radius: 23px;
+  
 }
 ul, li {
   padding: 0;
@@ -138,7 +118,7 @@ html, body {
 
 a {
 	color: #CCC;
-  text-decoration: none !important;
+  text-decoration: none;
 }
 a:hover {
 	color: #F99;
@@ -178,7 +158,7 @@ body {
 }
 
 body .page-content {
-  margin-top: 110px;
+  margin-top: 115px;
   background-color: #27292a;
   padding: 60px;
   border-radius: 23px;
@@ -383,19 +363,14 @@ Most Popular Style
 --------------------------------------------- 
 */
 
-.most-popular {
+ .most-popular {
   margin-top: 30px;
   padding: 30px;
   background-color: #1f2122;
   border-radius: 23px;
 }
 
-.most-popular .item {
-  background-color: #27292a;
-  padding: 30px 15px;
-  border-radius: 23px;
-  margin-bottom: 30px;
-}
+
 
 .most-popular .item .item {
   padding: 0px;
@@ -451,46 +426,6 @@ Most Popular Style
 .most-popular .main-button {
   text-align: center;
   margin-bottom: -53px;
-}
+} 
 
-/* 
----------------------------------------------
-Filter Function Styles
---------------------------------------------- 
-*/
-.filter-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 30px;
-}
-
-.genre-filter {
-  margin-right: 10px;
-  margin-bottom: 10px;
-}
-
-.genre-filter.active {
-  background-color: #e75e8d;
-  color: #fff;
-}
-
-.rating-filter {
-  margin-left: 10px;
-  margin-bottom: 10px;
-}
-
-.reset-filter {
-  background-color: #333;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  padding: 8px 15px;
-  cursor: pointer;
-  margin-left: 10px;
-  margin-bottom: 10px;
-}
-
-.reset-filter:hover {
-  background-color: #e75e8d;
-}
+* Custom style for the most popular section

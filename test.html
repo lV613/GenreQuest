@@ -1,135 +1,474 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Top 100 Games</title>
-    <style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Page Icon -->
+
+  <title>GameZone</title>
+  <style>
+   
+        /* CSS styles here */
+        @import url("https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap");
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
+      
+        * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+          border: none;
+          box-shadow: none;
+          outline: none;
+          font-family: "Poppins", sans-serif;
+        }
+      .link{
+        text-decoration: none;
+      }
+        button {
+          cursor: pointer;
+        }
+      
         body {
-            margin: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-                "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-                sans-serif;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            background-color: rgb(22, 20, 24);
-            color: #eee;
-            user-select: none;
+          background-color: #111827;
         }
-
-        code {
-            font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-                monospace;
+       .nav{
+  position: fixed;
+  top: 0;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  height: 100px;
+  line-height: 100px;
+  background: #111827;
+  z-index: 100;
+  }
+  .nav-logo {
+  font-size: 1.8rem;
+  }
+  .nav h1{
+   
+    color: white;
+    font-weight: 100;
+    font-family: "Black Ops One";
+    padding-bottom: 5rem;
+  }
+  
+  .nav-menu ul{
+  display: inline-flex;
+  }
+  .nav-menu ul li{
+    display: block;
+  list-style-type: none;
+  }
+  .nav-menu ul li .link{
+  text-decoration: none;
+  font-weight: 500;
+  color: #fff;
+  padding-bottom: 15px;
+  margin: 0 25px;
+  }
+  .link:hover, .active{
+  border-bottom: 2px solid #fff;
+  }
+  .nav h1 span {
+    color: #0ea5e9;
+    font-family: "Black Ops One";
+  }
+          .nav-button .btn{
+          width: 130px;
+          height: 40px;
+        font-weight: 500;
+        background: rgba(255, 255, 255, 0.4);
+        border: none;
+        border-radius: 30px;
+        cursor: pointer;
+        transition: .3s ease;
         }
-
+        .btn:hover{
+        background: rgba(255, 255, 255, 0.3);
+        }
+        main {
+          margin: 10px 16px;
+          padding: 40px 0;
+          display: flex;
+          flex-direction: column;
+          gap: 40px;
+        }
+        .app-list {
+            display: grid; /* Change display to grid */
+            grid-template-columns: repeat(3, minmax(250px, 300px)); /* Auto-fill columns with a minimum width of 250px */
+            gap: 20px; /* Added gap between grid items */
+          }
+        header {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          align-self: stretch;
+        }
+      
+        header h1 {
+          color: #e5e7eb;
+          font-family: "Black Ops One";
+          font-size: 40px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: normal;
+          position: relative;
+        }
+      
+        .content,
+        app-list {
+          display: grid;
+          grid-template-columns: repeat(Auto-fill, minmax(250px, 1fr));
+          gap: 40px;
+        }
+      
+        /* Responsive with mobile first */
+        /* Phone */
+        @media (min-width: 375px) {
+        }
+      
+        /* Tablet */
+        @media (min-width: 744px) {
+          main {
+            margin: 0 80px;
+          }
+        }
+      
+        /* Desktop */
+        @media (min-width: 1440px) {
+          main {
+            margin: 0 160px;
+          }
+        }
+      
+        .input-group {
+          display: flex;
+          padding: 12px 16px;
+          justify-content: center;
+          align-items: flex-start;
+          flex: 1 0 0;
+          border-radius: 8px;
+          background: #1f2937;
+          align-items: flex-start;
+          gap: 8px;
+          width: 100%;
+        }
+      
+        .input-group svg {
+          width: 24px;
+          height: 24px;
+          fill: #e5e7eb; /* Added fill color */
+        }
+      
+        .input-group input {
+          color: #e5e7eb;
+          font-family: Poppins;
+          font-size: 16px;
+          font-style: normal;
+          font-weight: 600;
+          line-height: 24px;
+          width: 100%;
+          background: transparent;
+          border: 1px solid #4b5563; /* Added border */
+          border-radius: 6px; /* Added border radius */
+          padding: 8px; /* Added padding */
+        }
+      
+        .list-title {
+          color: #e5e7eb;
+          font-family: Poppins;
+          font-size: 24px;
+          font-style: normal;
+          font-weight: 700;
+          line-height: 32px;
+        }
+      
+        /* Game List Grid */
         .game-card {
-            user-select: none;
-            width: 30rem;
-            height: 25rem;
-            margin: 5rem auto;
-            border: 1px solid #ffffff22;
-            background-color: #282c34;
-            background: linear-gradient(0deg, rgba(40, 44, 52, 1) 0%, rgba(17, 0, 32, .5) 100%);
-            box-shadow: 0 7px 20px 5px #00000088;
-            border-radius: .7rem;
-            backdrop-filter: blur(7px);
-            -webkit-backdrop-filter: blur(7px);
-            overflow: hidden;
-            transition: .5s all;
-            padding: 1rem; /* Added padding */
+          background-color: #374151; /* Added background color */
+          border-radius: 8px; /* Added border radius */
+          overflow: hidden; /* Hide overflowing content */
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Added box shadow */
         }
-
-        .game-card .main {
-            display: flex;
-            flex-direction: column;
-            width: 100%; /* Adjusted width */
-            padding: 1rem;
+      
+        .game-card img {
+          width: 100%; /* Make image fill its container */
+          height: 200px; /* Fixed height for consistency */
+          object-fit: cover; /* Maintain aspect ratio and cover container */
         }
-
-        .game-card .main .game-image {
-            border-radius: .5rem;
-            max-width: 100%;
-            height: 250px;
-            object-fit: cover;
+      
+        .game-info {
+          padding: 16px; /* Added padding */
         }
-
-        .game-card .main .game-data {
-            margin: .5rem 0;
-            color: #a89ec9;
+      
+        .game-info h3 {
+          color: #e5e7eb;
+          font-size: 18px;
+          margin-bottom: 8px; /* Added margin */
         }
-
-        .game-card .main .game-title {
-            margin: 0;
-            color: white;
-            font-family: 'Roboto Condensed', sans-serif;
-            font-weight: normal;
-            text-transform: uppercase;
+      
+        .game-info p {
+          color: #9ca3af; /* Added color */
+          font-size: 14px; /* Reduced font size */
+          margin-bottom: 4px; /* Added margin */
         }
-    </style>
+      
+        .game-info p:last-child {
+          margin-bottom: 0; /* Remove margin from last paragraph */
+        }
+      
+        .more-loader {
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+      
+        .more-loader::after {
+          content: "";
+          width: 32px;
+          height: 32px;
+          border-radius: 50%;
+          border: 5px solid #e5e7eb;
+          border-bottom-color: transparent;
+          animation: spin 1s linear infinite;
+        }
+      
+        @keyframes spin {
+          0% {
+            transform: rotate(0deg);
+          }
+          100% {
+            transform: rotate(360deg);
+          }
+        }
+      
+        .more-loader.loaded {
+          opacity: 0;
+          visibility: hidden;
+          pointer-events: none;
+        }
+      
+        /* Responsive with mobile first */
+        /* Phone */
+        @media (min-width: 375px) {
+        }
+      
+        /* Tablet */
+        @media (min-width: 744px) {
+          .game-list {
+            columns: 2;
+            column-gap: 16px;
+          }
+        }
+      
+        /* Desktop */
+        @media (min-width: 1440px) {
+          .game-list {
+            columns: 4;
+            column-gap: 32px;
+          }
+        }
+      
+        .loader {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background-color: rgba(0, 0, 0, 0.5);
+          z-index: 999;
+        }
+      
+        .loader img {
+          width: 100px;
+          height: auto;
+        }
+      </style>
+      
+  
 </head>
 <body>
-    <div class="container">
-        <h1>Top 100 Games</h1>
-        <div id="gameList"></div>
-        <div class="pagination">
-            <button id="prevPage">Previous</button>
-            <span id="currentPage">Page 1</span>
-            <button id="nextPage">Next</button>
-        </div>
+  <nav class="nav">
+    <div class="nav-logo">
+      <h1>Genre<span>Quest</span></h1>
     </div>
+    <div class="nav-menu" id="navMenu">
+    <ul>
+    <li><a href="GQhome.html" class="link">Home</a></li>
+    <li><a href="index.html" class="link">Top100</a></li>
+    <li><a href="test.html" class="link active">Browse</a></li>
+    <li><a href="Forum.html" class="link">Forum</a></li>
+    <li><a href="GQlogin.html" class="link">Login</a></li>
+    </ul>
+    </div>
+    </nav>
+  <header>
+    <h1>Genre<span>Quest</span></h1>
+  </header>
+  <main>
+    <div class="input-group">
+      
+      <input type="text" placeholder="Search for a game" id="searchInput" />
+    </div>
+    <app-list></app-list>
+  </main>
+  <script>
+    // JavaScript code here
+    class Game {
+      constructor(id, name, released, backgroundImage, rating, platforms) {
+        this.id = id;
+        this.name = name;
+        this.released = released;
+        this.backgroundImage = backgroundImage;
+        this.rating = rating;
+        this.platforms = platforms;
+      }
+    }
 
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const gameList = document.getElementById("gameList");
-            const prevPageBtn = document.getElementById("prevPage");
-            const nextPageBtn = document.getElementById("nextPage");
-            const currentPageSpan = document.getElementById("currentPage");
+    const APIKEY = "bdcc4010f2ab48e884c08d2e73080f9e";
+    const DATES = "2022-01-01,2023-11-01";
+    const ORDERING = "-added";
 
-            let currentPage = 1;
-            const pageSize = 10; // Number of games per page
+    const url = `https://api.rawg.io/api/games?key=${APIKEY}&dates=${DATES}&ordering=${ORDERING}`;
+    const platformsParentsUrl = `https://api.rawg.io/api/platforms/lists/parents?key=${APIKEY}&dates=${DATES}&ordering=${ORDERING}`;
+    const searchUrl = (query) =>
+      `https://api.rawg.io/api/games?key=${APIKEY}&dates=${DATES}&ordering=${ORDERING}&search=${query}`;
 
-            const fetchGames = async (page) => {
-                try {
-                    const response = await fetch(`https://api.rawg.io/api/games?key=YOUR_API_KEY&page=${page}&page_size=${pageSize}&ordering=-rating`);
-                    const data = await response.json();
-                    return data.results;
-                } catch (error) {
-                    console.error("Error fetching games:", error);
-                }
-            };
+    const formatDate = (inputDate) => {
+      // Implementation of formatDate function
+      const date = new Date(inputDate);
+      return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+    };
 
-            const renderGames = async (page) => {
-                const games = await fetchGames(page);
-                gameList.innerHTML = "";
-                games.forEach(game => {
-                    const gameCard = document.createElement("div");
-                    gameCard.classList.add("game-card");
-                    gameCard.innerHTML = `
-                        <div class='main'>
-                            <img class='game-image' src="${game.background_image}" alt="${game.name}" />
-                            <h2 class="game-title">${game.name}</h2>
-                            <p class='game-data'>Rating: ${game.rating}</p>
-                        </div>
-                    `;
-                    gameList.appendChild(gameCard);
-                });
-                currentPageSpan.textContent = `Page ${page}`;
-            };
+    const eventBus = new class {
+      // Implementation of EventBus
+      constructor() {
+        this.listeners = {};
+      }
 
-            renderGames(currentPage);
+      on(event, callback) {
+        if (!this.listeners[event]) {
+          this.listeners[event] = [];
+        }
+        this.listeners[event].push(callback);
+      }
 
-            prevPageBtn.addEventListener("click", () => {
-                if (currentPage > 1) {
-                    currentPage--;
-                    renderGames(currentPage);
-                }
-            });
+      emit(event, data) {
+        const eventListeners = this.listeners[event];
+        if (eventListeners) {
+          eventListeners.forEach((listener) => listener(data));
+        }
+      }
+    }();
 
-            nextPageBtn.addEventListener("click", () => {
-                currentPage++;
-                renderGames(currentPage);
-            });
-        });
-    </script>
+    const gameService = new (class {
+      // Implementation of GameService
+      constructor() {
+        this.games = [];
+        this.loadMore = true;
+        this.loading = false;
+      }
+
+      async fetchGames() {
+        this.loading = true;
+        const response = await fetch(url);
+        const data = await response.json();
+        this.games = data.results.map((result) => new Game(
+          result.id,
+          result.name,
+          result.released,
+          result.background_image,
+          result.rating,
+          result.platforms.map(platform => platform.platform.name)
+        ));
+        this.loading = false;
+        eventBus.emit("gamesLoaded", this.games);
+      }
+
+      async searchGames(query) {
+        this.loading = true;
+        const response = await fetch(searchUrl(query));
+        const data = await response.json();
+        this.games = data.results.map((result) => new Game(
+          result.id,
+          result.name,
+          result.released,
+          result.background_image,
+          result.rating,
+          result.platforms.map(platform => platform.platform.name)
+        ));
+        this.loading = false;
+        eventBus.emit("gamesLoaded", this.games);
+      }
+
+      async fetchMoreGames() {
+        if (!this.loadMore || this.loading) return;
+        this.loading = true;
+        const response = await fetch(url + `&page=${Math.floor(this.games.length / 20) + 1}`);
+        const data = await response.json();
+        if (data.results.length === 0) {
+          this.loadMore = false;
+          return;
+        }
+        const newGames = data.results.map((result) => new Game(
+          result.id,
+          result.name,
+          result.released,
+          result.background_image,
+          result.rating,
+          result.platforms.map(platform => platform.platform.name)
+        ));
+        this.games = [...this.games, ...newGames];
+        this.loading = false;
+        eventBus.emit("gamesLoaded", this.games);
+      }
+    })();
+    
+    const input = document.getElementById("searchInput");
+    input.addEventListener("input", () => {
+      const query = input.value.trim();
+      if (query) {
+        gameService.searchGames(query);
+      } else {
+        gameService.fetchGames();
+      }
+    });
+
+    eventBus.on("gamesLoaded", (games) => {
+      const appList = document.querySelector("app-list");
+      appList.innerHTML = "";
+      games.forEach((game) => {
+        const gameElement = document.createElement("div");
+        gameElement.innerHTML = `
+         <a href="gamepage.html?gameId=${game.id}" class="link"> <div class="game-card">
+            <img src="${game.backgroundImage}" alt="${game.name}" />
+            <div class="game-info">
+              <h3>${game.name}</h3>
+              <p>Released: ${formatDate(game.released)}</p>
+              <p>Rating: ${game.rating}</p>
+              <p>Platforms: ${game.platforms.join(", ")}</p>
+            </div>
+          </div></a>
+        `;
+        appList.appendChild(gameElement);
+      });
+    });
+
+    window.addEventListener("scroll", () => {
+      const { scrollTop, clientHeight, scrollHeight } = document.documentElement;
+      if (scrollHeight - scrollTop === clientHeight) {
+        gameService.fetchMoreGames();
+      }
+    });
+
+    window.addEventListener("DOMContentLoaded", () => {
+      gameService.fetchGames();
+    });
+  </script>
 </body>
 </html>

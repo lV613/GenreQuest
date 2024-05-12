@@ -5,171 +5,159 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Game Search</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
+        .game-card {
+            width: calc(100% / auto);
+            max-width: 27rem;
+            height: 25rem;
+            border: 1px solid #ffffff22;
+            background-color: #282c34;
+            background: linear-gradient(0deg, rgba(40, 44, 52, 1) 0%, rgba(17, 0, 32, .5) 100%);
+            box-shadow: 0 7px 20px 5px #00000088;
+            border-radius: .7rem;
+            overflow: hidden;
+            transition: .5s all;
+            position: relative; /* Required for the "R" symbol positioning */
         }
-        .nav {
-            position: fixed;
-            background-color: #000000;
-            top: 0;
+
+        .game-card.child-unfriendly {
+            /* Removed blur effect */
+        }
+
+        .game-card .main {
             display: flex;
-            justify-content: space-around;
+            flex-direction: column;
             width: 100%;
-            height: 90px;
-            line-height: 90px;
-            z-index: 100;
-          }
-          
-          .nav-logo p {
+            padding: 1rem;
+            box-sizing: border-box;
+        }
+
+        .game-card .main .game-image {
+            border-radius: .5rem;
+            max-width: 100%;
+            height: 250px;
+            object-fit: cover;
+            margin-bottom: 1rem;
+        }
+
+        .game-card .main .game-title {
+            margin-top: 0;
+            margin-bottom: .5rem;
             color: white;
-            font-size: 25px;
-            font-weight: 600;
-          }
-          
-          .nav-menu ul {
+            font-family: 'Roboto Condensed', sans-serif;
+            font-weight: normal;
+            text-transform: uppercase;
+        }
+
+        .game-card .main .genres {
+            color: #a89ec9;
+            margin-bottom: .5rem;
+        }
+
+        .game-card .main .game-data {
             display: flex;
-          }
-          
-          .nav-menu ul li {
+            color: #a89ec9;
             list-style-type: none;
-          }
-          
-          .nav-menu ul li .link {
-            text-decoration: none;
-            font-weight: 500;
-            color: #fff;
-            padding-bottom: 15px;
-            margin: 0 25px;
-          }
-          
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
+            padding: 0;
+            margin: 0;
+        }
+
+        .game-card .main .game-data li {
+            margin-right: 1rem;
+        }
+
+        /* Style for "R" symbol */
+        .child-unfriendly::after {
+            content: "R";
+            position: absolute;
+            top: .5rem;
+            right: .5rem;
+            width: 30px;
+            height: 30px;
+            background-color: red;
+            border-radius: 50%;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+        }
+
+        .gameList {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
             padding: 20px;
         }
 
-        h1 {
-            text-align: center;
-        }
-
-        input[type="text"] {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-        }
-
-        #suggestions {
-            margin-bottom: 10px;
-        }
-
-        #searchResults {
-            display: none;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            grid-gap: 10px;
-        }
-
-        .game-card {
-            border: 1px solid #160b0b;
-            border-radius: 5px;
-            padding: 10px;
-        }
-
-        .game-card img {
-            width: 100%;
-            border-radius: 5px;
+        /* Remove anchor tag text decoration */
+        .link {
+            text-decoration: none;
         }
     </style>
 </head>
 <body>
-    <nav class="nav">
-        <div class="nav-logo">
-          <p>GenreQuest</p>
-        </div>
-        <div class="nav-menu" id="navMenu">
-          <ul>
-            <li><a href="GQhome.html" class="link">Home</a></li>
-            <li><a href="index.html" class="link">Top 100</a></li>
-            <li><a href="testsearch.html" class="link active">Browse</a></li>
-            <li><a href="Forum.html" class="link">Forum</a></li>
-            <li><a href="GQlogin.html" class="link">Login</a></li>
-          </ul>
-        </div>
-      </nav>
-
-    <div class="container">
-        <h1>Game Search</h1>
+    <div class="search-container">
         <input type="text" id="searchInput" placeholder="Enter game title">
-        <div id="suggestions"></div>
-        <div id="searchResults"></div>
+        <button onclick="searchGames()">Search</button>
     </div>
+    <div id="resultsContainer" class="gameList"></div>
 
     <script>
-        const searchInput = document.getElementById('searchInput');
-        const suggestions = document.getElementById('suggestions');
-        const searchResults = document.getElementById('searchResults');
-        const API_KEY = '4c19a194643944708174f65954be4868';
-        const API_URL = 'https://api.rawg.io/api/games';
-        let games = [];
+        const apiKey = '4c19a194643944708174f65954be4868';
 
-        // Function to fetch games and store them in client-side storage
-        const fetchGames = async () => {
-            const response = await fetch(`${API_URL}?key=${API_KEY}&page_size=100`);
-            if (!response.ok) throw new Error('Error fetching games');
-            const data = await response.json();
-            games = data.results;
-            localStorage.setItem('games', JSON.stringify(games));
-        };
-
-        // Function to fetch game suggestions based on user input
-        const fetchSuggestions = async (query) => {
-            if (!query.trim()) return [];
-            const filteredGames = games.filter(game => game.name.toLowerCase().includes(query.toLowerCase()));
-            return filteredGames.map(game => game.name).slice(0, 5);
-        };
-
-        // Function to display game suggestions
-        const showSuggestions = async () => {
-            suggestions.innerHTML = '';
-            const query = searchInput.value.trim();
-            if (!query) return;
-            try {
-                const suggestionsData = await fetchSuggestions(query);
-                suggestionsData.forEach(async name => {
-                    const gameDetails = await fetchGameDetails(name);
-                    requestAnimationFrame(() => displayGameDetails(gameDetails));
-                });
-            } catch (error) {
-                console.error(error);
+        function searchGames() {
+            const searchInput = document.getElementById('searchInput').value.trim();
+            if (searchInput === '') {
+                alert('Please enter a game title.');
+                return;
             }
-        };
 
-        // Event listener for search input
-        searchInput.addEventListener('input', showSuggestions);
+            const url = `https://api.rawg.io/api/games?key=${apiKey}&search=${searchInput}`;
 
-        // Function to fetch game details by name
-        const fetchGameDetails = async (name) => {
-            const game = games.find(g => g.name.toLowerCase() === name.toLowerCase());
-            return game;
-        };
+            fetch(url)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    displayResults(data.results);
+                })
+                .catch(error => {
+                    console.error('There was a problem with the fetch operation:', error);
+                });
+        }
 
-        // Function to display game details
-        const displayGameDetails = (game) => {
-            if (!game) return;
-            const gameCard = `
-                <div class="game-card">
-                    <a href="gamepage.html?gameId=${game.id}">
-                        <h2>${game.name}</h2>
-                        <img src="${game.background_image}" alt="${game.name}">
-                        <p>Rating: ${game.rating}</p>
-                    </a>
-                </div>
-            `;
-            searchResults.innerHTML += gameCard;
-            searchResults.style.display = 'grid';
-        };
+        function displayResults(results) {
+            const resultsContainer = document.getElementById('resultsContainer');
+            resultsContainer.innerHTML = '';
 
-        // Fetch games when the page loads
-        fetchGames();
+            if (results.length === 0) {
+                resultsContainer.innerHTML = '<p>No results found.</p>';
+                return;
+            }
+
+            results.forEach(game => {
+                const gameElement = document.createElement('a');
+                gameElement.classList.add('link'); // Add class 'link' to anchor tag
+                gameElement.href = `gamepage.html?gameId=${game.id}`;
+                gameElement.innerHTML = `
+                    <div class="game-card ${game.child_friendly ? '' : 'child-unfriendly'}" id="${game.id}">
+                        <div class='main'>
+                            <img class='game-image' src="${game.background_image}" alt="${game.name} image">
+                            <h2 class="game-title">${game.name.length > 15 ? game.name.substring(0, 14) + "..." : game.name}</h2>
+                            <span class="genres">&nbsp&nbsp&nbsp${game.genres.map(genre => genre.name).join(', ')}</span>
+                            <ul class='game-data'>
+                                <li>&nbsp&nbsp&nbsp<i class="fa fa-star"></i> <span class="rating">${game.rating}</span></li> &nbsp&nbsp&nbsp&nbsp&nbsp
+                                <li><i class="fa-regular fa-calendar"></i> <span class="date">${game.released}</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                `;
+                resultsContainer.appendChild(gameElement);
+            });
+        }
     </script>
 </body>
 </html>

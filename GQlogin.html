@@ -7,22 +7,53 @@
 <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css'
 rel='stylesheet'>
 <link rel="stylesheet" href="GQlogin.css">
+<style>
+  /* Additional CSS for slideshow */
+  #slideshow {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+  }
+  #slideshow img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    animation:  ease-in-out 3ms infinite; /* Adjust timing as needed */
+    filter: blur(3px); /* Adjust blur intensity as needed */
+  }
+  @keyframes fade {
+    0% { opacity: 0; }
+    20% { opacity: 1; }
+    80% { opacity: 1; }
+    100% { opacity: 0; }
+  }
+</style>
 </head>
 <body>
+<!-- Slideshow container -->
+<div id="slideshow"></div>
+
 <div class="wrapper">
 <nav class="nav">
-<div class="nav-logo">
-<p>GenreQuest</p>
-</div>
-<div class="nav-menu" id="navMenu">
-<ul>
-<li><a href="GQhome.html" class="link">Home</a></li>
-<li><a href="index.html" class="link">Top 100</a></li>
-<li><a href="testsearch.html" class="link">Browse</a></li>
-<li><a href="Forum.html" class="link">Forum</a></li>
-<li><a href="GQlogin.html" class="link active">Login</a></li>
-</ul>
-</div>
+  <div class="nav-logo">
+    <h1>Genre<span>Quest</span></h1>
+  </div>
+  <div class="nav-menu" id="navMenu">
+  <ul>
+  <li><a href="GQhome.html" class="link">Home</a></li>
+  <li><a href="index.html" class="link">Top100</a></li>
+  <li><a href="test.html" class="link">Browse</a></li>
+  <li><a href="Forum.html" class="link">Forum</a></li>
+  <li><a href="GQlogin.html" class="link active">Login</a></li>
+  </ul>
+  </div>
 <div class="nav-button">
 <button class="btn white-btn" id="loginBtn" onclick="login()">Sign
 In</button>
@@ -103,6 +134,35 @@ onclick="login()">Login</a></span>
 </div>
 </div>
 </div>
+<script>
+const apiKey = '4c19a194643944708174f65954be4868'; // Provided API key
+const endpoint = 'https://api.rawg.io/api/games';
+
+// Function to fetch game images from the RAWG API
+function fetchGameImages() {
+  fetch(`${endpoint}?key=${apiKey}&ordering=-rating&page_size=4`)
+    .then(response => response.json())
+    .then(data => {
+      const games = data.results;
+      const slideshow = document.getElementById('slideshow');
+      
+      // Add images to slideshow
+      games.forEach(game => {
+        const imageUrl = game.background_image;
+        const img = document.createElement('img');
+        img.src = imageUrl;
+        slideshow.appendChild(img);
+      });
+    })
+    .catch(error => {
+      console.error('Error fetching game images:', error);
+    });
+}
+
+// Call the function to fetch game images
+fetchGameImages();
+</script>
+
 <script>
 // Function to handle user login
 function loginUser() {
@@ -206,5 +266,6 @@ function register() {
   y.style.right = "5px";
 }
 </script>
+
 </body>
 </html>
