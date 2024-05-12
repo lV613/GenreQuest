@@ -3,12 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- Page Icon -->
 
-  <title>GameZone</title>
+  <title>Browse</title>
   <style>
-   
-        /* CSS styles here */
         @import url("https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap");
         @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
       
@@ -44,6 +41,7 @@
   }
   .nav-logo {
   font-size: 1.8rem;
+  padding-left: 20px;
   }
   .nav h1{
    
@@ -74,19 +72,56 @@
     color: #0ea5e9;
     font-family: "Black Ops One";
   }
-          .nav-button .btn{
-          width: 130px;
-          height: 40px;
-        font-weight: 500;
-        background: rgba(255, 255, 255, 0.4);
-        border: none;
-        border-radius: 30px;
-        cursor: pointer;
-        transition: .3s ease;
-        }
-        .btn:hover{
-        background: rgba(255, 255, 255, 0.3);
-        }
+.dropdown-btn {
+  display: none;
+}
+
+@media (max-width: 800px) {
+  .nav {
+      justify-content: space-between;
+  }
+
+  .nav-menu {
+      display: none;
+  }
+
+  .dropdown-btn {
+      display: block;
+      font-size: 1.5rem; 
+      color: white;
+      margin-right: 20px; 
+      cursor: pointer;
+  }
+
+  .dropdown-btn:hover {
+      color: #0ea5e9;
+  }
+
+  .nav-menu.active {
+      display: flex; 
+      flex-direction: column; 
+      position: absolute; 
+      top: 100px; 
+      left: 0;
+      width: 100%;
+      background: #111827;
+      text-align: center; 
+  }
+
+  .nav-menu.active ul {
+      margin: 0;
+      padding: 0;
+  }
+
+  .nav-menu.active ul li {
+      margin: 20px 0; 
+  }
+
+  .nav-menu.active ul li .link {
+      padding-bottom: 0; 
+  }
+}
+
         main {
           margin: 10px 16px;
           padding: 40px 0;
@@ -95,9 +130,9 @@
           gap: 40px;
         }
         .app-list {
-            display: grid; /* Change display to grid */
-            grid-template-columns: repeat(3, minmax(250px, 300px)); /* Auto-fill columns with a minimum width of 250px */
-            gap: 20px; /* Added gap between grid items */
+            display: grid; 
+            grid-template-columns: repeat(3, minmax(250px, 300px));
+            gap: 20px; 
           }
         header {
           display: flex;
@@ -122,20 +157,16 @@
           grid-template-columns: repeat(Auto-fill, minmax(250px, 1fr));
           gap: 40px;
         }
-      
-        /* Responsive with mobile first */
-        /* Phone */
         @media (min-width: 375px) {
         }
       
-        /* Tablet */
+        
         @media (min-width: 744px) {
           main {
             margin: 0 80px;
           }
         }
-      
-        /* Desktop */
+    
         @media (min-width: 1440px) {
           main {
             margin: 0 160px;
@@ -158,7 +189,7 @@
         .input-group svg {
           width: 24px;
           height: 24px;
-          fill: #e5e7eb; /* Added fill color */
+          fill: #e5e7eb;
         }
       
         .input-group input {
@@ -170,9 +201,9 @@
           line-height: 24px;
           width: 100%;
           background: transparent;
-          border: 1px solid #4b5563; /* Added border */
-          border-radius: 6px; /* Added border radius */
-          padding: 8px; /* Added padding */
+          border: 1px solid #4b5563; 
+          border-radius: 6px; 
+          padding: 8px; 
         }
       
         .list-title {
@@ -184,38 +215,37 @@
           line-height: 32px;
         }
       
-        /* Game List Grid */
         .game-card {
-          background-color: #374151; /* Added background color */
-          border-radius: 8px; /* Added border radius */
-          overflow: hidden; /* Hide overflowing content */
-          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Added box shadow */
+          background-color: #374151; 
+          border-radius: 8px; 
+          overflow: hidden; 
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
         }
       
         .game-card img {
-          width: 100%; /* Make image fill its container */
-          height: 200px; /* Fixed height for consistency */
-          object-fit: cover; /* Maintain aspect ratio and cover container */
+          width: 100%; 
+          height: 200px; 
+          object-fit: cover; 
         }
       
         .game-info {
-          padding: 16px; /* Added padding */
+          padding: 16px; 
         }
       
         .game-info h3 {
           color: #e5e7eb;
           font-size: 18px;
-          margin-bottom: 8px; /* Added margin */
+          margin-bottom: 8px; 
         }
       
         .game-info p {
-          color: #9ca3af; /* Added color */
-          font-size: 14px; /* Reduced font size */
-          margin-bottom: 4px; /* Added margin */
+          color: #9ca3af; 
+          font-size: 14px; 
+          margin-bottom: 4px; 
         }
       
         .game-info p:last-child {
-          margin-bottom: 0; /* Remove margin from last paragraph */
+          margin-bottom: 0; 
         }
       
         .more-loader {
@@ -250,20 +280,15 @@
           pointer-events: none;
         }
       
-        /* Responsive with mobile first */
-        /* Phone */
         @media (min-width: 375px) {
         }
       
-        /* Tablet */
         @media (min-width: 744px) {
           .game-list {
             columns: 2;
             column-gap: 16px;
           }
         }
-      
-        /* Desktop */
         @media (min-width: 1440px) {
           .game-list {
             columns: 4;
@@ -295,18 +320,19 @@
 <body>
   <nav class="nav">
     <div class="nav-logo">
-      <h1>Genre<span>Quest</span></h1>
+        <h1>Genre<span>Quest</span></h1>
     </div>
+    <div class="dropdown-btn" onclick="toggleMenu()">☰</div>
     <div class="nav-menu" id="navMenu">
-    <ul>
-    <li><a href="GQhome.html" class="link">Home</a></li>
-    <li><a href="index.html" class="link">Top100</a></li>
-    <li><a href="test.html" class="link active">Browse</a></li>
-    <li><a href="Forum.html" class="link">Forum</a></li>
-    <li><a href="GQlogin.html" class="link">Login</a></li>
-    </ul>
+        <ul>
+            <li><a href="GQhome.html" class="link">Home</a></li>
+            <li><a href="index.html" class="link">Top100</a></li>
+            <li><a href="test.html" class="link active">Browse</a></li>
+            <li><a href="Forum.html" class="link">Forum</a></li>
+            <li><a href="GQlogin.html" class="link">Login</a></li>
+        </ul>
     </div>
-    </nav>
+</nav>
   <header>
     <h1>Genre<span>Quest</span></h1>
   </header>
@@ -470,5 +496,9 @@
       gameService.fetchGames();
     });
   </script>
+  <script>function toggleMenu() {
+    var navMenu = document.getElementById("navMenu");
+    navMenu.classList.toggle("active");
+}</script>
 </body>
 </html>

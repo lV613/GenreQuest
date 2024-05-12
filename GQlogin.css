@@ -33,38 +33,88 @@ body{
     background: linear-gradient(rgba(39,39,39, 0.6), transparent);
     z-index: 100;
     }
-    .nav-logo {
-        font-size: 1.8rem;
-        }
-        .nav h1{
-         
-          color: white;
-          font-weight: 100;
-          font-family: "Black Ops One";
-          padding-bottom: 5rem;
-        }
-        
-        .nav-menu ul{
-        display: inline-flex;
-        }
-        .nav-menu ul li{
+      .nav-logo {
+      font-size: 1.8rem;
+      padding-left: 20px;
+      }
+      .nav h1{
+       
+        color: white;
+        font-weight: 100;
+        font-family: "Black Ops One";
+        padding-bottom: 5rem;
+      }
+      
+      .nav-menu ul{
+      display: inline-flex;
+      }
+      .nav-menu ul li{
+        display: block;
+      list-style-type: none;
+      }
+      .nav-menu ul li .link{
+      text-decoration: none;
+      font-weight: 500;
+      color: #fff;
+      padding-bottom: 15px;
+      margin: 0 25px;
+      }
+      .link:hover, .active{
+      border-bottom: 2px solid #fff;
+      }
+      .nav h1 span {
+        color: #0ea5e9;
+        font-family: "Black Ops One";
+      }
+    .dropdown-btn {
+      display: none;
+    }
+    
+    @media (max-width: 800px) {
+      .nav {
+          justify-content: space-between;
+      }
+    
+      .nav-menu {
+          display: none;
+      }
+    
+      .dropdown-btn {
           display: block;
-        list-style-type: none;
-        }
-        .nav-menu ul li .link{
-        text-decoration: none;
-        font-weight: 500;
-        color: #fff;
-        padding-bottom: 15px;
-        margin: 0 25px;
-        }
-        .link:hover, .active{
-        border-bottom: 2px solid #fff;
-        }
-        .nav h1 span {
+          font-size: 1.5rem; 
+          color: white;
+          margin-right: 20px; 
+          cursor: pointer;
+      }
+    
+      .dropdown-btn:hover {
           color: #0ea5e9;
-          font-family: "Black Ops One";
-        }
+      }
+    
+      .nav-menu.active {
+          display: flex; 
+          flex-direction: row; 
+          position: absolute; 
+          top: 100px; 
+          left: 0;
+          width: 100%;
+          background: linear-gradient(rgba(39,39,39, 0.6), transparent);;
+          text-align: center; 
+      }
+    
+      .nav-menu.active ul {
+          margin: 0;
+          padding: 0;
+      }
+    
+      .nav-menu.active ul li {
+          margin: 20px 0; 
+      }
+    
+      .nav-menu.active ul li .link {
+          padding-bottom: 0; 
+      }
+    }
     .link:hover, .active{
     border-bottom: 2px solid #fff;
     }

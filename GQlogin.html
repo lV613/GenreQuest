@@ -34,6 +34,7 @@ rel='stylesheet'>
     80% { opacity: 1; }
     100% { opacity: 0; }
   }
+  
 </style>
 </head>
 <body>
@@ -45,6 +46,7 @@ rel='stylesheet'>
   <div class="nav-logo">
     <h1>Genre<span>Quest</span></h1>
   </div>
+  <div class="dropdown-btn" onclick="toggleMenu()">☰</div>
   <div class="nav-menu" id="navMenu">
   <ul>
   <li><a href="GQhome.html" class="link">Home</a></li>
@@ -59,9 +61,6 @@ rel='stylesheet'>
 In</button>
 <button class="btn" id="registerBtn" onclick="register()">Sign
 Up</button>
-</div>
-<div class="nav-menu-btn">
-<i class="bx bx-menu" onclick="myMenuFunction()"></i>
 </div>
 </nav>
 <!----------------------------- Form box ----------------------------------->
@@ -266,6 +265,9 @@ function register() {
   y.style.right = "5px";
 }
 </script>
-
+<script>function toggleMenu() {
+  var navMenu = document.getElementById("navMenu");
+  navMenu.classList.toggle("active");
+}</script>
 </body>
 </html>

@@ -22,7 +22,7 @@
             width: 100%;
             height: 100px;
             line-height: 100px;
-            background: #111827;
+            background: #000000;
             z-index: 100;
             }
             .nav h1{
@@ -31,10 +31,10 @@
               font-size: 2.5rem;
               font-family: "Black Ops One";
             }
-            .nav-logo p{
+            .nav-logo{
             color: white;
-            font-size: 25px;
             font-weight: 600;
+            padding-left: 20px;
             }
             .nav-menu ul{
             display: inline-flex;
@@ -57,19 +57,56 @@
               color: #0ea5e9;
               font-family: "Black Ops One";
             }
-            .nav-button .btn{
-            width: 130px;
-            height: 40px;
-          font-weight: 500;
-          background: rgba(255, 255, 255, 0.4);
-          border: none;
-          border-radius: 30px;
-          cursor: pointer;
-          transition: .3s ease;
-          }
-          .btn:hover{
-          background: rgba(255, 255, 255, 0.3);
-          }
+            
+                .dropdown-btn {
+                  display: none;
+              }
+                
+                @media (max-width: 800px) {
+                  .nav {
+                      justify-content: space-between;
+                  }
+                
+                  .nav-menu {
+                      display: none;
+                  }
+                
+                  .dropdown-btn {
+                      display: block;
+                      font-size: 1.5rem; 
+                      color: white;
+                      margin-right: 20px; 
+                      cursor: pointer;
+                  }
+                
+                  .dropdown-btn:hover {
+                      color: #0ea5e9;
+                  }
+                
+                  .nav-menu.active {
+                      display: flex; 
+                      flex-direction: column; 
+                      position: absolute; 
+                      top: 100px; 
+                      left: 0;
+                      width: 100%;
+                      background: #000000;
+                      text-align: center; 
+                  }
+                
+                  .nav-menu.active ul {
+                      margin: 0;
+                      padding: 0;
+                  }
+                
+                  .nav-menu.active ul li {
+                      margin: 20px 0; 
+                  }
+                
+                  .nav-menu.active ul li .link {
+                      padding-bottom: 0; 
+                  }
+                }
         html{
             font-size: 14px;
             font-family: Arial, Helvetica, sans-serif;
@@ -87,42 +124,13 @@
             font-weight: bolder;
         }
         
-        /* home */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
             background-color: #000000;
         } 
-        .nav{
-            position: fixed;
-            background-color: #000000;
-            top: 0;
-            display: flex;
-            justify-content: space-around;
-            width: 100%;
-            height: 100px;
-            line-height: 100px;
-            z-index: 100;
-            }
-            .nav-logo p{
-            color: white;
-            font-size: 25px;
-            font-weight: 600;
-            }
-            .nav-menu ul{
-            display: flex;
-            }
-            .nav-menu ul li{
-            list-style-type: none;
-            }
-            .nav-menu ul li .link{
-            text-decoration: none;
-            font-weight: 500;
-            color: #fff;
-            padding-bottom: 15px;
-            margin: 0 25px;
-            }
+       
         .container{
             margin: 10px;
             padding: 15px;
@@ -422,18 +430,19 @@
 <body>
     <nav class="nav">
         <div class="nav-logo">
-          <h1>Genre<span>Quest</span></h1>
+            <h1>Genre<span>Quest</span></h1>
         </div>
+        <div class="dropdown-btn" onclick="toggleMenu()">☰</div>
         <div class="nav-menu" id="navMenu">
-        <ul>
-        <li><a href="GQhome.html" class="link">Home</a></li>
-        <li><a href="index.html" class="link">Top100</a></li>
-        <li><a href="test.html" class="link">Browse</a></li>
-        <li><a href="Forum.html" class="link active">Forum</a></li>
-        <li><a href="GQlogin.html" class="link">Login</a></li>
-        </ul>
+            <ul>
+                <li><a href="GQhome.html" class="link">Home</a></li>
+                <li><a href="index.html" class="link">Top100</a></li>
+                <li><a href="test.html" class="link">Browse</a></li>
+                <li><a href="Forum.html" class="link active">Forum</a></li>
+                <li><a href="GQlogin.html" class="link">Login</a></li>
+            </ul>
         </div>
-        </nav>
+    </nav>
         <br><br><br><br><br><br>
    <header>
  
@@ -847,6 +856,9 @@
     <footer>
         <span>&copy; &nbsp; </span>
     </footer>
-    <script src="Forum.js"></script>
+    <script> function toggleMenu() {
+        var menu = document.getElementById("navMenu");
+        menu.classList.toggle("active");
+    }</script>
 </body>
 </html>
